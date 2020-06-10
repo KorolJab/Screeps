@@ -200,7 +200,7 @@ namespace Screeps
                         else
                         {
                             Lexa = (EnergyCollector)map[creepX, creepY];
-
+                             
                         }
                         Lexa.targetX = i;
                             Lexa.targetY = j;
