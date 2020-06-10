@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Net.Http.Headers;
 
 namespace Screeps
 {
@@ -153,26 +154,57 @@ namespace Screeps
                 }
             }
         }
-        public void foundTarget()
+        public void foundTarget(Creep Lexa)
         {
             int creepX=0;
             int creepY=0;
-            Miner Lexa;
+            bool flag=false;
+            Resources target=null;
+            if(Lexa.GetType() == typeof(Miner))
+            {
+                
+                target = new Mine();
+            }
+            else if (Lexa.GetType()==typeof(Lumberjack))
+            {
+                target = new Tree();
+            }
+            else
+            {
+                target = new Energy();
+            }
             for (int i = 0; i < 29; i++)
             {
 
                 for (int j = 0; j < 119; j++)
                 {
-                    if (map[i, j].GetType() == typeof(Miner) )
+
+                    if (map[i, j].GetType() == target.GetType() )
                     {
+
                         creepX = i;
                         creepY = j;
+                        flag = !flag;
                     }
-                    if (map[i, j].GetType() == typeof(Mine))
+                    if (map[i, j].GetType() == target.GetType() && flag)
                     {
-                       Lexa = (Miner) map[creepX,creepY] ;
-                        Lexa.targetY = j;
+                        if(Lexa.GetType() == typeof(Miner))
+                        {
+                            Lexa = (Miner)map[creepX, creepY];
+                        } 
+                           else if (Lexa.GetType() == typeof(Lumberjack))
+                        {
+                            Lexa = (Lumberjack)map[creepX, creepY];
 
+                        }
+                        else
+                        {
+                            Lexa = (EnergyCollector)map[creepX, creepY];
+
+                        }
+                        Lexa.targetX = i;
+                            Lexa.targetY = j;
+                        map[creepX, creepY] = Lexa;
                     }
                 }
             }
