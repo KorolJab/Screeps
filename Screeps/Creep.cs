@@ -8,8 +8,6 @@ namespace Screeps
 {
     class Creep
     {
-        public int creepX;
-        public int creepY;
         protected int creepPower;
         public int creepInventory;
         public int targetX;
@@ -26,7 +24,7 @@ namespace Screeps
             creepInventory = creepPower;
         }
                                       
-
+       
 
         protected void giveResources()
         {

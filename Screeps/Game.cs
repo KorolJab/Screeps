@@ -6,6 +6,7 @@ using System.Windows;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Net.Http.Headers;
+using System.Runtime.InteropServices;
 
 namespace Screeps
 {
@@ -209,16 +210,58 @@ namespace Screeps
                 }
             }
         }
-        private void moving()
+        private void moving(Creep Misha)
         {
             bool FoundedMiner=true;
             bool FoundedMine=true;
+            for(int i=0; i<29; i++)
+            {
+                for(int j=0;j<119;j++)
+                {
+                    if(Misha.GetType()==typeof(Miner))
+                    {
+                        if(i<Misha.targetX)
+                        {
+                            map[i + 1, j] = Misha;
+                            map[i, j] = null;
+                        }
+                        else
+                        {
+                            map[i - 1, j] = Misha;
+                            map[i, j] = null;
+                        }
+                    }
 
+                    if (Misha.GetType() == typeof(Lumberjack))
+                    {
+                        if (i < Misha.targetX)
+                        {
+                            map[i + 1, j] = Misha;
+                            map[i, j] = null;
+                        }
+                        else
+                        {
+                            map[i - 1, j] = Misha;
+                            map[i, j] = null;
+                        }
+                    }
+
+                    if (Misha.GetType() == typeof(EnergyCollector))
+                    {
+                        if (i < Misha.targetX)
+                        {
+                            map[i + 1, j] = Misha;
+                            map[i, j] = null;
+                        }
+                        else
+                        {
+                            map[i - 1, j] = Misha;
+                            map[i, j] = null;
+                        }
+                    }
+                }
+            }
             
-            //шахтёр
-
-            
-
             
         }
        
