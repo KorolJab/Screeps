@@ -6,3 +6,10 @@ C:\Users\Ирина\Desktop\Screeps\bin\Debug\Screeps.pdb
 C:\Users\Ирина\Desktop\Screeps\obj\Debug\Screeps.csprojAssemblyReference.cache
 C:\Users\Ирина\Desktop\Screeps\obj\Debug\Screeps.exe
 C:\Users\Ирина\Desktop\Screeps\obj\Debug\Screeps.pdb
+C:\Users\Ирина\Desktop\Скрипс\Screeps\Screeps\obj\Debug\Screeps.csprojAssemblyReference.cache
+C:\Users\Ирина\Desktop\Скрипс\Screeps\Screeps\obj\Debug\Screeps.csproj.CoreCompileInputs.cache
+C:\Users\Ирина\Desktop\Скрипс\Screeps\Screeps\obj\Debug\Screeps.exe
+C:\Users\Ирина\Desktop\Скрипс\Screeps\Screeps\obj\Debug\Screeps.pdb
+C:\Users\Ирина\Desktop\Скрипс\Screeps\Screeps\bin\Debug\Screeps.exe.config
+C:\Users\Ирина\Desktop\Скрипс\Screeps\Screeps\bin\Debug\Screeps.exe
+C:\Users\Ирина\Desktop\Скрипс\Screeps\Screeps\bin\Debug\Screeps.pdb

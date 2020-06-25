@@ -12,7 +12,6 @@ namespace Screeps
         public int Hp;
         public point pozition;
         List<point> points = new List<point>();
-        public point Coords;
        // public Resources(int x,int y) 
        //{
        //     Coords = new point(x, y);

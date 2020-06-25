@@ -12,27 +12,24 @@ namespace Screeps
 {
     class Game
     {
-        object[,] map = new object[29, 119];
+
+
+        public object[,] map = new object[xBarrier, yBarrier];
         private Mine cave = new Mine();
         private Tree forest = new Tree();
         private Energy lighting = new Energy();
-        
-
+        static int xBarrier = 120;
+        static int yBarrier = 30;
+        public Printer risovalka;
         private int SpawnerX = 59, SpawnerY = 14;
 
         public point mapping;
         public Game()
         {
 
-
-            map[rand.Next(119), rand.Next(29)] = new Mine();
-            map[rand.Next(119), rand.Next(29)] = new Tree();
-            map[rand.Next(119), rand.Next(29)] = new Energy();
+           
             map[SpawnerX, SpawnerY] = new Spawner();
             classes = new List<Creep>() { new Miner(), new Lumberjack(), new EnergyCollector() };
-            map[type[0].Coords.x, type[0].Coords.y] = type[0];
-            map[type[1].Coords.x, type[1].Coords.y] = type[1];
-            map[type[2].Coords.x, type[2].Coords.y] = type[2];
 
 
         }
@@ -46,13 +43,15 @@ namespace Screeps
         }
         public void Turn()
         {
+            spawn();
             Respawn();
+
             moving();
+
         }
         private Random rand = new Random();
         public int x;
         public int y;
-        List<Resources> type;
         public List<Creep> classes;
         //шахтёр
         point pont = new point();
@@ -60,113 +59,167 @@ namespace Screeps
         point pont1 = new point();
         //электрик вася
         point pont2 = new point();
-        
+        private void spawn()
+        {
+            int spawnX = rand.Next(119);
+            int spawnY = rand.Next(29);
+            
+            while(map[spawnX,spawnY] != null)
+            {
+                spawnX = rand.Next(119);
+                spawnY = rand.Next(29);
+            }
+            map[spawnX, spawnY] = new Mine();
+            object Ris = map[spawnX, spawnY];
+            risovalka.print(Ris, spawnX, spawnY, spawnX + 1, spawnY);
+
+
+            while (map[spawnX, spawnY] != null)
+            {
+                spawnX = rand.Next(119);
+                spawnY = rand.Next(29);
+            }
+            map[rand.Next(119), rand.Next(29)] = new Tree();
+            while (map[spawnX, spawnY] != null)
+            {
+                spawnX = rand.Next(119);
+                spawnY = rand.Next(29);
+            }
+            map[rand.Next(119), rand.Next(29)] = new Energy();
+            while (map[spawnX, spawnY] != null)
+            {
+                spawnX = rand.Next(119);
+                spawnY = rand.Next(29);
+            }
+            map[rand.Next(119), rand.Next(29)] = new Miner();
+            while (map[spawnX, spawnY] != null)
+            {
+                spawnX = rand.Next(119);
+                spawnY = rand.Next(29);
+            }
+            map[rand.Next(119), rand.Next(29)] = new Lumberjack();
+            while (map[spawnX, spawnY] != null)
+            {
+                spawnX = rand.Next(119);
+                spawnY = rand.Next(29);
+            }
+            map[rand.Next(119), rand.Next(29)] = new EnergyCollector();
+            while (map[spawnX, spawnY] != null)
+            {
+                spawnX = rand.Next(119);
+                spawnY = rand.Next(29);
+            }
+        }
         private void Respawn()
-            {
-            for (int i = 0; i < 29; i++)
+        {
+            for (int i = 0; i < xBarrier; i++)
             {
 
-                for (int j = 0; j < 119; j++)
+                for (int j = 0; j < yBarrier; j++)
                 {
-                    if (map[i, j].GetType() == cave.GetType())
+                    if (map[i, j] != null)
                     {
-                        cave = (Mine)map[i, j];
-                        if(cave.Hp==0)
+                        if (map[i, j].GetType() == cave.GetType())
                         {
-                            int x = rand.Next(119);
-                            int y = rand.Next(29);
-                            if (map[x,y ]==null)
+                            cave = (Mine)map[i, j];
+                            if (cave.Hp == 0)
                             {
-                                map[x, y] = new Mine();
-
-                            }
-                            else
-                            {
-                                while(map[x, y] != null)
+                                int x = rand.Next(119);
+                                int y = rand.Next(29);
+                                if (map[x, y] == null)
                                 {
-                                    x = rand.Next(119);
-                                    y = rand.Next(29);
+                                    map[x, y] = new Mine();
+
                                 }
-                                map[x, y] = new Mine();
+                                else
+                                {
+                                    while (map[x, y] != null)
+                                    {
+                                        x = rand.Next(119);
+                                        y = rand.Next(29);
+                                    }
+                                    map[x, y] = new Mine();
+
+                                }
+
+
 
                             }
-
-                            map[i, j] = null;
-                            
-                                    
                         }
-                    }
-                    if (map[i, j].GetType() == cave.GetType())
-                    {
-                        forest = (Tree)map[i, j];
-                        if (forest.Hp == 0)
+                        if (map[i, j].GetType() == forest.GetType())
                         {
-                            int x = rand.Next(119);
-                            int y = rand.Next(29);
-                            if (map[x, y] == null)
+                            forest = (Tree)map[i, j];
+                            if (forest.Hp == 0)
                             {
-                                map[x, y] = new Tree();
-
-                            }
-                            else
-                            {
-                                while (map[x, y] != null)
+                                int x = rand.Next(xBarrier);
+                                int y = rand.Next(yBarrier);
+                                if (map[x, y] == null)
                                 {
-                                    x = rand.Next(119);
-                                    y = rand.Next(29);
+                                    map[x, y] = new Tree();
+
                                 }
-                                map[x, y] = new Tree();
-
-                            }
-
-                            map[i, j] = null;
-
-
-                        }
-                    }
-                    if (map[i, j].GetType() == cave.GetType())
-                    {
-                        lighting = (Energy)map[i, j];
-                        if (lighting.Hp == 0)
-                        {
-                            int x = rand.Next(119);
-                            int y = rand.Next(29);
-                            if (map[x, y] == null)
-                            {
-                                map[x, y] = new Energy();
-
-                            }
-                            else
-                            {
-                                while (map[x, y] != null)
+                                else
                                 {
-                                    x = rand.Next(119);
-                                    y = rand.Next(29);
+                                    while (map[x, y] != null)
+                                    {
+                                        x = rand.Next(xBarrier);
+                                        y = rand.Next(yBarrier);
+                                    }
+                                    map[x, y] = new Tree();
+
                                 }
-                                map[x, y] = new Energy();
+
+
 
                             }
 
-                            map[i, j] = null;
+                            if (map[i, j].GetType() == lighting.GetType())
+                            {
+                                lighting = (Energy)map[i, j];
+                                if (lighting.Hp == 0)
+                                {
+                                    int x = rand.Next(xBarrier);
+                                    int y = rand.Next(yBarrier);
+                                    if (map[x, y] == null)
+                                    {
+                                        map[x, y] = new Energy();
+
+                                    }
+                                    else
+                                    {
+                                        while (map[x, y] != null)
+                                        {
+                                            x = rand.Next(xBarrier);
+                                            y = rand.Next(yBarrier);
+                                        }
+                                        map[x, y] = new Energy();
+
+                                    }
 
 
+
+                                }
+
+                            }
                         }
+                        map[i, j] = null;
+
                     }
                 }
             }
         }
         public void foundTarget(Creep Lexa)
         {
-            int creepX=0;
-            int creepY=0;
-            bool flag=false;
-            Resources target=null;
-            if(Lexa.GetType() == typeof(Miner))
+            int creepX = 0;
+            int creepY = 0;
+            bool flag = false;
+            Resources target = null;
+            if (Lexa.GetType() == typeof(Miner))
             {
-                
+
                 target = new Mine();
             }
-            else if (Lexa.GetType()==typeof(Lumberjack))
+            else if (Lexa.GetType() == typeof(Lumberjack))
             {
                 target = new Tree();
             }
@@ -174,13 +227,13 @@ namespace Screeps
             {
                 target = new Energy();
             }
-            for (int i = 0; i < 29; i++)
+            for (int i = 0; i < xBarrier; i++)
             {
 
-                for (int j = 0; j < 119; j++)
+                for (int j = 0; j < yBarrier; j++)
                 {
 
-                    if (map[i, j].GetType() == target.GetType() )
+                    if (map[i, j].GetType() == target.GetType())
                     {
 
                         creepX = i;
@@ -189,11 +242,11 @@ namespace Screeps
                     }
                     if (map[i, j].GetType() == target.GetType() && flag)
                     {
-                        if(Lexa.GetType() == typeof(Miner))
+                        if (Lexa.GetType() == typeof(Miner))
                         {
                             Lexa = (Miner)map[creepX, creepY];
-                        } 
-                           else if (Lexa.GetType() == typeof(Lumberjack))
+                        }
+                        else if (Lexa.GetType() == typeof(Lumberjack))
                         {
                             Lexa = (Lumberjack)map[creepX, creepY];
 
@@ -201,77 +254,88 @@ namespace Screeps
                         else
                         {
                             Lexa = (EnergyCollector)map[creepX, creepY];
-                             
+
                         }
                         Lexa.targetX = i;
-                            Lexa.targetY = j;
+                        Lexa.targetY = j;
                         map[creepX, creepY] = Lexa;
                     }
                 }
             }
         }
-        private void moving(Creep Misha)
+        
+        private void moving()
         {
-            bool FoundedMiner=true;
-            bool FoundedMine=true;
-            for(int i=0; i<29; i++)
+
+            for (int i = 0; i < xBarrier; i++)
             {
-                for(int j=0;j<119;j++)
+                for (int j = 0; j < yBarrier; j++)
                 {
-                    if(Misha.GetType()==typeof(Miner))
+                    if (map[i, j] != null)
                     {
-                        if(i<Misha.targetX)
-                        {
-                            map[i + 1, j] = Misha;
-                            map[i, j] = null;
-                        }
-                        else
-                        {
-                            map[i - 1, j] = Misha;
-                            map[i, j] = null;
-                        }
-                    }
 
-                    if (Misha.GetType() == typeof(Lumberjack))
-                    {
-                        if (i < Misha.targetX)
+                        if (map[i,j].GetType() == typeof(Miner))
                         {
-                            map[i + 1, j] = Misha;
-                            map[i, j] = null;
+                            Miner worker = (Miner)map[i, j];
+                            if (i < worker.targetX)
+                            {
+                                map[i + 1, j] = map[i, j];
+                                risovalka.print(map[i + 1, j], i, j, i + 1, j);
+                                map[i, j] = null;
+                            }
+                            else
+                            {
+                                map[i - 1, j] = map[i, j];
+                                map[i, j] = null;
+                            }
                         }
-                        else
+                        if (map[i, j].GetType() == typeof(Lumberjack))
                         {
-                            map[i - 1, j] = Misha;
-                            map[i, j] = null;
-                        }
-                    }
+                            Lumberjack worker = (Lumberjack)map[i, j];
+                            if (i < worker.targetX)
+                            {
+                                map[i + 1, j] = map[i, j];
+                                risovalka.print(map[i + 1, j], i, j, i + 1, j);
 
-                    if (Misha.GetType() == typeof(EnergyCollector))
-                    {
-                        if (i < Misha.targetX)
-                        {
-                            map[i + 1, j] = Misha;
-                            map[i, j] = null;
+                                map[i, j] = null;
+                            }
+                            else
+                            {
+                                map[i - 1, j] = map[i, j];
+                                map[i, j] = null;
+                            }
                         }
-                        else
+
+                        if (map[i, j].GetType() == typeof(EnergyCollector))
                         {
-                            map[i - 1, j] = Misha;
-                            map[i, j] = null;
+                            EnergyCollector worker = (EnergyCollector)map[i, j];
+                            if (i < worker.targetX)
+                            {
+                                map[i + 1, j] = map[i, j];
+                                risovalka.print(map[i + 1, j], i, j, i + 1, j);
+
+                                map[i, j] = null;
+                            }
+                            else
+                            {
+                                map[i - 1, j] = map[i, j];
+                                map[i, j] = null;
+                            }
                         }
                     }
                 }
             }
-            
-            
+
+
         }
-       
+
         public void SpawnCreep()
         {
             string num = Console.ReadLine();
             int.TryParse(num, out int number);
             //
-            while(!(number<4&number>0))
-            {   
+            while (!(number < 4 & number > 0))
+            {
                 num = Console.ReadLine();
                 int.TryParse(num, out number);
 
@@ -297,6 +361,6 @@ namespace Screeps
             }
 
         }
-        
+
     }
 }

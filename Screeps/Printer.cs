@@ -8,5 +8,48 @@ namespace Screeps
 {
     class Printer
     {
+       public void print(object printing,int xClear,int yClear,int xPrint,int yPrint)
+        {
+            char output =' ';
+            Console.SetCursorPosition(xClear, yClear);
+            Console.WriteLine(output);
+            if(printing.GetType() == typeof(Miner))
+            {
+                output = 'M';
+            }
+            if (printing.GetType() == typeof(Lumberjack))
+            {
+                output = 'L';
+                
+            }
+            if (printing.GetType() == typeof(EnergyCollector))
+            {
+                output = 'E';
+
+            }
+            if (printing.GetType() == typeof(Mine))
+            {
+                output = 'П';
+            }
+            if (printing.GetType() == typeof(Tree))
+            {
+                output = '|';
+
+            }
+            if (printing.GetType() == typeof(Energy))
+            {
+                output = '*';
+
+            }
+            if (printing.GetType() == typeof(Spawner))
+            {
+                output = '0';
+
+            }
+            Console.SetCursorPosition(xPrint, yPrint);
+            Console.Write(output);
+            Console.ReadLine();
+        }
+
     }
 }

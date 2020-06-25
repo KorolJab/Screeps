@@ -31,26 +31,26 @@ namespace Screeps
             int given = creepInventory;
             creepInventory = 0;
         }
-        public void moveToResourses(point pont)
-        {
-            if (creepX < pont.x)
-            {
-                creepX++;
-            }
-            else
-            {
-                creepX--;
-            }
-            if (creepY < pont.y)
-            {
-                creepY++;
-            }
-            else
-            {
-                creepY--;
+        //public void moveToResourses(point pont)
+        //{
+        //    if (creepX < pont.x)
+        //    {
+        //        creepX++;
+        //    }
+        //    else
+        //    {
+        //        creepX--;
+        //    }
+        //    if (creepY < pont.y)
+        //    {
+        //        creepY++;
+        //    }
+        //    else
+        //    {
+        //        creepY--;
 
-            }
-        }
+        //    }
+        //}
         public void backToHome()
         {
 
