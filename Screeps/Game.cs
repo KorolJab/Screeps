@@ -26,8 +26,8 @@ namespace Screeps
         public point mapping;
         public Game()
         {
-
-           
+            risovalka = new Printer();
+            spawn();
             map[SpawnerX, SpawnerY] = new Spawner();
             classes = new List<Creep>() { new Miner(), new Lumberjack(), new EnergyCollector() };
 
@@ -42,8 +42,9 @@ namespace Screeps
 
         }
         public void Turn()
+
         {
-            spawn();
+
             Respawn();
 
             moving();
@@ -59,56 +60,60 @@ namespace Screeps
         point pont1 = new point();
         //электрик вася
         point pont2 = new point();
+
         private void spawn()
         {
+            
             int spawnX = rand.Next(119);
             int spawnY = rand.Next(29);
-            
             while(map[spawnX,spawnY] != null)
             {
                 spawnX = rand.Next(119);
                 spawnY = rand.Next(29);
             }
             map[spawnX, spawnY] = new Mine();
-            object Ris = map[spawnX, spawnY];
-            risovalka.print(Ris, spawnX, spawnY, spawnX + 1, spawnY);
+            risovalka.print(map[spawnX, spawnY], spawnX, spawnY);
+
+            spawnX = rand.Next(119);
+            spawnY = rand.Next(29);
+            while (map[spawnX, spawnY] != null)
+            {
+                spawnX = rand.Next(119);
+                spawnY = rand.Next(29);
+            }
+            map[spawnX, spawnY] = new Miner();
+            risovalka.print(map[spawnX, spawnY], spawnX, spawnY);
+            //while (map[spawnX, spawnY] != null)
+            //{
+            //    spawnX = rand.Next(119);
+            //    spawnY = rand.Next(29);
+            //}
+            //map[rand.Next(119), rand.Next(29)] = new Tree();
+            //while (map[spawnX, spawnY] != null)
+            //{
+            //    spawnX = rand.Next(119);
+            //    spawnY = rand.Next(29);
+            //}
+            //map[rand.Next(119), rand.Next(29)] = new Energy();
+            //while (map[spawnX, spawnY] != null)
+            //{
+            //    spawnX = rand.Next(119);
+            //    spawnY = rand.Next(29);
+            //}
 
 
-            while (map[spawnX, spawnY] != null)
-            {
-                spawnX = rand.Next(119);
-                spawnY = rand.Next(29);
-            }
-            map[rand.Next(119), rand.Next(29)] = new Tree();
-            while (map[spawnX, spawnY] != null)
-            {
-                spawnX = rand.Next(119);
-                spawnY = rand.Next(29);
-            }
-            map[rand.Next(119), rand.Next(29)] = new Energy();
-            while (map[spawnX, spawnY] != null)
-            {
-                spawnX = rand.Next(119);
-                spawnY = rand.Next(29);
-            }
-            map[rand.Next(119), rand.Next(29)] = new Miner();
-            while (map[spawnX, spawnY] != null)
-            {
-                spawnX = rand.Next(119);
-                spawnY = rand.Next(29);
-            }
-            map[rand.Next(119), rand.Next(29)] = new Lumberjack();
-            while (map[spawnX, spawnY] != null)
-            {
-                spawnX = rand.Next(119);
-                spawnY = rand.Next(29);
-            }
-            map[rand.Next(119), rand.Next(29)] = new EnergyCollector();
-            while (map[spawnX, spawnY] != null)
-            {
-                spawnX = rand.Next(119);
-                spawnY = rand.Next(29);
-            }
+            //map[rand.Next(119), rand.Next(29)] = new Lumberjack();
+            //while (map[spawnX, spawnY] != null)
+            //{
+            //    spawnX = rand.Next(119);
+            //    spawnY = rand.Next(29);
+            //}
+            //map[rand.Next(119), rand.Next(29)] = new EnergyCollector();
+            //while (map[spawnX, spawnY] != null)
+            //{
+            //    spawnX = rand.Next(119);
+            //    spawnY = rand.Next(29);
+            //}
         }
         private void Respawn()
         {
@@ -280,12 +285,15 @@ namespace Screeps
                             if (i < worker.targetX)
                             {
                                 map[i + 1, j] = map[i, j];
-                                risovalka.print(map[i + 1, j], i, j, i + 1, j);
+                                risovalka.print(map[i + 1, j], i + 1, j);
                                 map[i, j] = null;
                             }
                             else
                             {
+
                                 map[i - 1, j] = map[i, j];
+                                risovalka.print(map[i -1, j], i -1, j);
+
                                 map[i, j] = null;
                             }
                         }
@@ -295,7 +303,7 @@ namespace Screeps
                             if (i < worker.targetX)
                             {
                                 map[i + 1, j] = map[i, j];
-                                risovalka.print(map[i + 1, j], i, j, i + 1, j);
+                                risovalka.print(map[i + 1, j], i + 1, j);
 
                                 map[i, j] = null;
                             }
@@ -312,7 +320,7 @@ namespace Screeps
                             if (i < worker.targetX)
                             {
                                 map[i + 1, j] = map[i, j];
-                                risovalka.print(map[i + 1, j], i, j, i + 1, j);
+                                risovalka.print(map[i + 1, j], i + 1, j);
 
                                 map[i, j] = null;
                             }

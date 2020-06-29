@@ -8,11 +8,12 @@ namespace Screeps
 {
     class Printer
     {
-       public void print(object printing,int xClear,int yClear,int xPrint,int yPrint)
+        //int xClear,int yClear
+        public void print(Object printing,int xPrint,int yPrint)
         {
             char output =' ';
-            Console.SetCursorPosition(xClear, yClear);
-            Console.WriteLine(output);
+            //Console.SetCursorPosition(xClear, yClear);
+           // Console.WriteLine(output);
             if(printing.GetType() == typeof(Miner))
             {
                 output = 'M';
@@ -48,7 +49,6 @@ namespace Screeps
             }
             Console.SetCursorPosition(xPrint, yPrint);
             Console.Write(output);
-            Console.ReadLine();
         }
 
     }

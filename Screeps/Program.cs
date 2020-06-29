@@ -13,7 +13,7 @@ namespace Screeps
             Game game = new Game();
             while(true)
             {
-               // System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(500);
                 game.Turn();
 
             }
