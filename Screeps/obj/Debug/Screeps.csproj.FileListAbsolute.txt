@@ -13,3 +13,17 @@ C:\Users\Ирина\Desktop\Скрипс\Screeps\Screeps\obj\Debug\Screeps.pdb
 C:\Users\Ирина\Desktop\Скрипс\Screeps\Screeps\bin\Debug\Screeps.exe.config
 C:\Users\Ирина\Desktop\Скрипс\Screeps\Screeps\bin\Debug\Screeps.exe
 C:\Users\Ирина\Desktop\Скрипс\Screeps\Screeps\bin\Debug\Screeps.pdb
+C:\Users\Ирина\Desktop\рабочий стул\Скрипс\Screeps\Screeps\bin\Debug\Screeps.exe.config
+C:\Users\Ирина\Desktop\рабочий стул\Скрипс\Screeps\Screeps\bin\Debug\Screeps.exe
+C:\Users\Ирина\Desktop\рабочий стул\Скрипс\Screeps\Screeps\bin\Debug\Screeps.pdb
+C:\Users\Ирина\Desktop\рабочий стул\Скрипс\Screeps\Screeps\obj\Debug\Screeps.csprojAssemblyReference.cache
+C:\Users\Ирина\Desktop\рабочий стул\Скрипс\Screeps\Screeps\obj\Debug\Screeps.csproj.CoreCompileInputs.cache
+C:\Users\Ирина\Desktop\рабочий стул\Скрипс\Screeps\Screeps\obj\Debug\Screeps.exe
+C:\Users\Ирина\Desktop\рабочий стул\Скрипс\Screeps\Screeps\obj\Debug\Screeps.pdb
+C:\раб стол\рабочий стул\Скрипс\Screeps\Screeps\bin\Debug\Screeps.exe.config
+C:\раб стол\рабочий стул\Скрипс\Screeps\Screeps\bin\Debug\Screeps.exe
+C:\раб стол\рабочий стул\Скрипс\Screeps\Screeps\bin\Debug\Screeps.pdb
+C:\раб стол\рабочий стул\Скрипс\Screeps\Screeps\obj\Debug\Screeps.csprojAssemblyReference.cache
+C:\раб стол\рабочий стул\Скрипс\Screeps\Screeps\obj\Debug\Screeps.csproj.CoreCompileInputs.cache
+C:\раб стол\рабочий стул\Скрипс\Screeps\Screeps\obj\Debug\Screeps.exe
+C:\раб стол\рабочий стул\Скрипс\Screeps\Screeps\obj\Debug\Screeps.pdb

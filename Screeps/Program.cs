@@ -11,9 +11,10 @@ namespace Screeps
         static void Main(string[] args)
         {
             Game game = new Game();
+            
             while(true)
             {
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(0);
                 game.Turn();
 
             }

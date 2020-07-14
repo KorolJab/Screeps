@@ -14,6 +14,13 @@ namespace Screeps
         public int targetY;
         public Creep()
         {
+            
+        }
+        protected void setTarget(point target)
+        {
+
+            targetX = target.x;
+            targetY = target.y;
         }
         public void countRightWay()
         {
@@ -51,9 +58,10 @@ namespace Screeps
 
         //    }
         //}
-        public void backToHome()
+        public void backToHome(int spawnerX,int spawnerY)
         {
-
+            targetX = spawnerX;
+            targetY = spawnerY;
         }
 
 
