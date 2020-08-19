@@ -12,59 +12,30 @@ namespace Screeps
         public int creepInventory;
         public int targetX;
         public int targetY;
+        public bool reachedTargetX;
+        public bool reachedTargetY;
         public Creep()
         {
             
         }
-        protected void setTarget(point target)
+        public void setTarget(point target)
         {
 
             targetX = target.x;
             targetY = target.y;
         }
-        public void countRightWay()
-        {
-        }
-        protected void mine(int resourceHp)
-        {
-            resourceHp -= creepPower;
-            creepInventory = creepPower;
-        }
-                                      
        
-
+        public void mine(int resourceHp)
+        {
+            
+            creepInventory += resourceHp;
+        }
+        
         protected void giveResources()
         {
             int given = creepInventory;
             creepInventory = 0;
         }
-        //public void moveToResourses(point pont)
-        //{
-        //    if (creepX < pont.x)
-        //    {
-        //        creepX++;
-        //    }
-        //    else
-        //    {
-        //        creepX--;
-        //    }
-        //    if (creepY < pont.y)
-        //    {
-        //        creepY++;
-        //    }
-        //    else
-        //    {
-        //        creepY--;
-
-        //    }
-        //}
-        public void backToHome(int spawnerX,int spawnerY)
-        {
-            targetX = spawnerX;
-            targetY = spawnerY;
-        }
-
-
     }
 }
     

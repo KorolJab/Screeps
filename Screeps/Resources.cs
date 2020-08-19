@@ -10,31 +10,23 @@ namespace Screeps
     {
 
         public int Hp;
-        public point pozition;
-        List<point> points = new List<point>();
-       // public Resources(int x,int y) 
-       //{
-       //     Coords = new point(x, y);
-       //     nearbyPoints(x,y);
-       //}
-      public void nearbyPoints(int x,int y)
+
+        public List<point> points = new List<point>();
+       
+
+        public int giveRes(int dmg, int Hp)
         {
-            //1
-            points.Add(new point(x,y-1));
-            //2
-            points.Add(new point(x,y+1));
-            //3
-            points.Add(new point(x+1,y));
-            //4
-            points.Add(new point(x-1,y));
-            //5
-            points.Add(new point(x+1 ,y+1));
-            //6
-            points.Add(new point(x-1, y+1));
-            //7
-            points.Add(new point(x-1, y-1));
-            //8
-            points.Add(new point(x-1, y+1));
+            int returnedRes;
+            if (Hp - dmg > 0)
+            {
+                returnedRes = dmg;
+            }
+            else
+            {
+                returnedRes = Hp;
+            }
+
+            return returnedRes;
         }
     }
 }
