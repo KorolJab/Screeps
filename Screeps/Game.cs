@@ -38,9 +38,9 @@ namespace Screeps
         public void presStart()
         {
             cave.Hp = 100;
-            map[SpawnerX, SpawnerY + 1] = new Miner();
+            Miner someCreep = new Miner();
             someCreep.setTarget(foundTarget(someCreep));
-            someCreep = (Creep)map[SpawnerX, SpawnerY + 1];
+            map[SpawnerX, SpawnerY + 1] = someCreep;
             risovalka.print(map[SpawnerX, SpawnerY + 1], SpawnerX, SpawnerY + 1);
             // map[SpawnerX + 1, SpawnerY + 1] = new Lumberjack();
             // map[SpawnerX + 1, SpawnerY + 1] = new EnergyCollector();
