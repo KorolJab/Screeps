@@ -39,9 +39,9 @@ namespace Screeps
         {
             cave.Hp = 100;
             map[SpawnerX, SpawnerY + 1] = new Miner();
-            risovalka.print(map[SpawnerX, SpawnerY + 1], SpawnerX, SpawnerY + 1);
-            someCreep = (Creep)map[SpawnerX, SpawnerY + 1];
             someCreep.setTarget(foundTarget(someCreep));
+            someCreep = (Creep)map[SpawnerX, SpawnerY + 1];
+            risovalka.print(map[SpawnerX, SpawnerY + 1], SpawnerX, SpawnerY + 1);
             // map[SpawnerX + 1, SpawnerY + 1] = new Lumberjack();
             // map[SpawnerX + 1, SpawnerY + 1] = new EnergyCollector();
 
@@ -89,7 +89,6 @@ namespace Screeps
                                     }
                                    
                                     
-                                    someCreep.setTarget(targeting);
                                     break;
                                     }
 
@@ -204,35 +203,25 @@ namespace Screeps
         }
         private void Respawn(int i,int j)
         {
-          if (map[i, j].GetType() == cave.GetType())
+            if (map[i, j].GetType() == cave.GetType())
             {
-                            cave = (Mine)map[i, j];
-                            
-                                int x = i;
-                                int y = j;
-                               while (map[x, y] != null)
-                                {
-                                    x = rand.Next(119);
-                                    y = rand.Next(29);
+                cave = (Mine)map[i, j];
 
-                                }
+                int x = i;
+                int y = j;
+                while (map[x, y] != null)
+                {
+                    x = rand.Next(119);
+                    y = rand.Next(29);
+
+                }
                 map[x, y] = new Mine();
-                //else
-                //{
-                //    while (map[x, y] != null)
-                //    {
-                //        x = rand.Next(119);
-                //        y = rand.Next(29);
-                //    }
-                //    map[x, y] = new Mine();
-
-                //}
 
 
                 map[i, j] = null;
 
-                            
-           }
+
+            }
         }
         public point foundTarget(Creep Lexa)
         {
