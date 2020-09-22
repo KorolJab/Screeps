@@ -25,6 +25,7 @@ namespace Screeps
         protected Creep someCreep;
         public point mapping;
         public Spawner creator;
+        public point spawnerPoint;
         public Game()
         {
             map = new object[xBarrier, yBarrier];
@@ -32,12 +33,15 @@ namespace Screeps
             presStart();
             spawn();
             map[SpawnerX, SpawnerY] = new Spawner();
+            spawnerPoint= new point(SpawnerX, SpawnerY);
         }
         public void presStart()
         {
             cave.Hp = 100;
             map[SpawnerX, SpawnerY + 1] = new Miner();
             risovalka.print(map[SpawnerX, SpawnerY + 1], SpawnerX, SpawnerY + 1);
+            someCreep = (Creep)map[SpawnerX, SpawnerY + 1];
+            someCreep.setTarget(foundTarget(someCreep));
             // map[SpawnerX + 1, SpawnerY + 1] = new Lumberjack();
             // map[SpawnerX + 1, SpawnerY + 1] = new EnergyCollector();
 
@@ -52,42 +56,46 @@ namespace Screeps
         //}
         //private Random rand = new Random();
         public void Turn()
-
         {
-            Respawn();
-
-
             for (int i = 0; i < xBarrier; i++)
             {
                 for (int j = 0; j < yBarrier; j++)
                 {
                     if (map[i, j] != null)
                     {
-                        Creep idk = (Creep)map[i, j];
-                        if (!idk.reachedTargetX)
-                        {
                             switch (map[i, j].GetType().Name)
                             {
-
                                 case nameof(Miner):
                                     {
-                                        if()
+                                    someCreep = (Creep)map[i, j];
+                                    Resources temporaryRes = (Resources)map[someCreep.targetX, someCreep.targetY];
+                                    if (!someCreep.turned)
+                                    {
+                                        if (someCreep.reachedTargetX && someCreep.reachedTargetY)
                                         {
-
+                                            if (map[someCreep.targetX,someCreep.targetY].GetType()==typeof(Mine))
+                                            {
+                                                someCreep.takeRes(temporaryRes.giveRes(someCreep.creepPower));
+                                                someCreep.setTarget(spawnerPoint);
+                                            }
+                                            
                                         }
                                         else
                                         {
-                                            targeting = new point(SpawnerX, SpawnerY);
-                                        }
+                                            moving(someCreep, i, j);
 
-                                        someCreep = (Creep)map[i, j];
-                                        someCreep.setTarget(targeting);
-                                        break;
+                                        }
+                                    
+                                    }
+                                   
+                                    
+                                    someCreep.setTarget(targeting);
+                                    break;
                                     }
 
                             }
                             Console.ReadLine();
-                        }
+                        
                     }
                 }
             }
@@ -194,105 +202,37 @@ namespace Screeps
             //    spawnY = rand.Next(29);
             //}
         }
-        private void Respawn()
+        private void Respawn(int i,int j)
         {
-            for (int i = 0; i < xBarrier; i++)
+          if (map[i, j].GetType() == cave.GetType())
             {
-                for (int j = 0; j < yBarrier; j++)
-                {
-                    // Console.Write(map[i, j]);
-                    if (map[i, j] != null)
-                    {
-                        if (map[i, j].GetType() == cave.GetType())
-                        {
                             cave = (Mine)map[i, j];
-                            if (cave.Hp == 0)
-                            {
+                            
                                 int x = i;
                                 int y = j;
-                                if (map[x, y] == null)
+                               while (map[x, y] != null)
                                 {
                                     x = rand.Next(119);
                                     y = rand.Next(29);
-                                    map[x, y] = new Mine();
 
                                 }
-                                //else
-                                //{
-                                //    while (map[x, y] != null)
-                                //    {
-                                //        x = rand.Next(119);
-                                //        y = rand.Next(29);
-                                //    }
-                                //    map[x, y] = new Mine();
+                map[x, y] = new Mine();
+                //else
+                //{
+                //    while (map[x, y] != null)
+                //    {
+                //        x = rand.Next(119);
+                //        y = rand.Next(29);
+                //    }
+                //    map[x, y] = new Mine();
 
-                                //}
-
-
-                                map[i, j] = null;
-
-                            }
-                        }
-                        //if (map[i, j].GetType() == forest.GetType())
-                        //{
-                        //    forest = (Tree)map[i, j];
-                        //    if (forest.Hp == 0)
-                        //    {
-                        //        int x = rand.Next(xBarrier);
-                        //        int y = rand.Next(yBarrier);
-                        //        if (map[x, y] == null)
-                        //        {
-                        //            map[x, y] = new Tree();
-
-                        //        }
-                        //        else
-                        //        {
-                        //            while (map[x, y] != null)
-                        //            {
-                        //                x = rand.Next(xBarrier);
-                        //                y = rand.Next(yBarrier);
-                        //            }
-                        //            map[x, y] = new Tree();
-
-                        //        }
+                //}
 
 
+                map[i, j] = null;
 
-                        //    }
-
-                        //    if (map[i, j].GetType() == lighting.GetType())
-                        //    {
-                        //        lighting = (Energy)map[i, j];
-                        //        if (lighting.Hp == 0)
-                        //        {
-                        //            int x = rand.Next(xBarrier);
-                        //            int y = rand.Next(yBarrier);
-                        //            if (map[x, y] == null)
-                        //            {
-                        //                map[x, y] = new Energy();
-
-                        //            }
-                        //            else
-                        //            {
-                        //                while (map[x, y] != null)
-                        //                {
-                        //                    x = rand.Next(xBarrier);
-                        //                    y = rand.Next(yBarrier);
-                        //                }
-                        //                map[x, y] = new Energy();
-
-                        //            }
-
-
-
-                        //        }
-
-                        //    }
-                        //}
-
-                    }
-                }
-            }
+                            
+           }
         }
         public point foundTarget(Creep Lexa)
         {
@@ -319,9 +259,13 @@ namespace Screeps
             }
             return new point(setX, setY);
         }
-        
+        public void mining(Creep lexa,Resources res)
+        {
+            lexa.takeRes(res.giveRes(lexa.creepPower));
+            lexa.turned = true;
+        }
     }
-
+    
 
 
     //public void SpawnCreep()

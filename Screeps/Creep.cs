@@ -8,15 +8,17 @@ namespace Screeps
 {
     class Creep
     {
-        protected int creepPower;
+        public int creepPower;
         public int creepInventory;
         public int targetX;
         public int targetY;
         public bool reachedTargetX;
         public bool reachedTargetY;
+        public bool turned;
         public Creep()
         {
-            
+            creepPower = 10;
+
         }
         public void setTarget(point target)
         {
@@ -24,18 +26,18 @@ namespace Screeps
             targetX = target.x;
             targetY = target.y;
         }
-       
-        public void mine(int resourceHp)
+
+        public void takeRes(int resourceHp)
         {
-            
+
             creepInventory += resourceHp;
         }
-        
-        protected void giveResources()
+
+        public int giveResources()
         {
             int given = creepInventory;
             creepInventory = 0;
+            return given;
         }
     }
 }
-    

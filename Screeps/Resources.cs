@@ -14,7 +14,7 @@ namespace Screeps
         public List<point> points = new List<point>();
        
 
-        public int giveRes(int dmg, int Hp)
+        public int giveRes(int dmg)
         {
             int returnedRes;
             if (Hp - dmg > 0)
