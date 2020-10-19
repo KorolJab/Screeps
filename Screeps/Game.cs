@@ -12,14 +12,18 @@ namespace Screeps
 {
     class Game
     {
+        public int setX;
+        public int setY;
+        public int printPozitionX;
+        public int printPozitionY;
         private List<Type> types = new List<Type> { typeof(Miner) };
         public point targeting;
         public object[,] map;
         private Mine cave = new Mine();
         private Tree forest = new Tree();
         private Energy lighting = new Energy();
-        static int xBarrier = 120;
-        static int yBarrier = 30;
+        static int xBarrier = 130;
+        static int yBarrier = 50;
         public Printer risovalka;
         private int SpawnerX = 59, SpawnerY = 14;
         protected Creep someCreep;
@@ -30,18 +34,22 @@ namespace Screeps
         {
             map = new object[xBarrier, yBarrier];
             risovalka = new Printer();
-            presStart();
             spawn();
             map[SpawnerX, SpawnerY] = new Spawner();
-            spawnerPoint= new point(SpawnerX, SpawnerY);
+            spawnerPoint = new point(SpawnerX, SpawnerY);
+            presStart();
+           
         }
         public void presStart()
         {
+            
             cave.Hp = 100;
             Miner someCreep = new Miner();
             someCreep.setTarget(foundTarget(someCreep));
             map[SpawnerX, SpawnerY + 1] = someCreep;
             risovalka.print(map[SpawnerX, SpawnerY + 1], SpawnerX, SpawnerY + 1);
+            risovalka.print(map[SpawnerX, SpawnerY], SpawnerX, SpawnerY);
+
             // map[SpawnerX + 1, SpawnerY + 1] = new Lumberjack();
             // map[SpawnerX + 1, SpawnerY + 1] = new EnergyCollector();
 
@@ -68,15 +76,18 @@ namespace Screeps
                                 case nameof(Miner):
                                     {
                                     someCreep = (Creep)map[i, j];
-                                    Resources temporaryRes = (Resources)map[someCreep.targetX, someCreep.targetY];
+                                   
                                     if (!someCreep.turned)
                                     {
                                         if (someCreep.reachedTargetX && someCreep.reachedTargetY)
                                         {
                                             if (map[someCreep.targetX,someCreep.targetY].GetType()==typeof(Mine))
                                             {
-                                                someCreep.takeRes(temporaryRes.giveRes(someCreep.creepPower));
+                                                Resources temporaryRes = (Resources)map[someCreep.targetX, someCreep.targetY];
+                                                mining(someCreep, temporaryRes);
                                                 someCreep.setTarget(spawnerPoint);
+                                                someCreep.reachedTargetX = false;
+                                                someCreep.reachedTargetY = false;
                                             }
                                             
                                         }
@@ -93,7 +104,7 @@ namespace Screeps
                                     }
 
                             }
-                            Console.ReadLine();
+                 
                         
                     }
                 }
@@ -103,60 +114,55 @@ namespace Screeps
 
         private void moving(Creep someCreep, int i, int j)
         {
-            int printPozitionX = 1;
-            int printPozitionY = 1;
-            int deletePozitionX;
-            int deletePozitionY;
+            
+            int deletePozitionX=i;
+            int deletePozitionY=j;
+            
             if (someCreep.reachedTargetX == false)
             {
                 if (i < someCreep.targetX)
                 {
                     printPozitionX = i + 1;
                 }
-                else if (i == someCreep.targetX)
-                {
-                    printPozitionX = i;
-                }
                 else
                 {
                     printPozitionX = i - 1;
                 }
+            }
+            if (printPozitionX == (someCreep.targetX - 1) || printPozitionX == (someCreep.targetX + 1))
 
+            {
+                someCreep.reachedTargetX = true;
+
+            }
+            if (someCreep.reachedTargetY==false)
+            {
                 if (j < someCreep.targetY)
                 {
                     printPozitionY = j + 1;
-                }
-                else if (j == someCreep.targetY)
-                {
-                    printPozitionY = j;
                 }
                 else
                 {
                     printPozitionY = j - 1;
                 }
             }
-            if (i == (someCreep.targetX - 1) || i == (someCreep.targetX + 1))
-            {
-                someCreep.reachedTargetX = true;
-
-            }
-            if (i == (someCreep.targetY - 1) || i == (someCreep.targetY + 1))
+            if (printPozitionY == (someCreep.targetY - 1) || printPozitionY == (someCreep.targetY + 1))
             {
                 someCreep.reachedTargetY = true;
 
             }
-            deletePozitionX = i;
-            deletePozitionY = j;
             map[printPozitionX, printPozitionY] = map[i, j];
-            map[deletePozitionX, deletePozitionY] = null;
-            risovalka.print(map[printPozitionX, printPozitionY], printPozitionX, printPozitionY);
-            Console.SetCursorPosition(deletePozitionX, deletePozitionY);
-            Console.Write(" ");
+            if (!someCreep.reachedTargetX && !someCreep.reachedTargetY)
+            {
+               map[deletePozitionX, deletePozitionY] = null;
+                Console.SetCursorPosition(deletePozitionX, deletePozitionY);
+                Console.Write(" ");
+                risovalka.print(map[printPozitionX, printPozitionY], printPozitionX, printPozitionY);
+                
+            }
         }
-
         private void spawn()
         {
-
             int spawnX = rand.Next(119);
             int spawnY = rand.Next(29);
             while (map[spawnX, spawnY] != null)
@@ -226,8 +232,7 @@ namespace Screeps
         public point foundTarget(Creep Lexa)
         {
 
-            int setX = 1;
-            int setY = 1;
+            
             for (int i = 0; i < xBarrier; i++)
             {
                 for (int j = 0; j < yBarrier; j++)
@@ -236,12 +241,12 @@ namespace Screeps
                     {
                         if (map[i, j].GetType() == typeof(Mine))
                         {
-                            if (Lexa.GetType().Name == nameof(Miner))
-                            {
-                                setX = 42;
-                                setY = 11;
-                            }
-
+                            //if (Lexa.GetType().Name == nameof(Miner))
+                            //{
+                            //    setX=1
+                            //}
+                            setX = i;
+                            setY = j;
                         }
                     }
                 }

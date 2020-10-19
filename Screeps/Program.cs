@@ -14,9 +14,9 @@ namespace Screeps
             
             while(true)
             {
-                System.Threading.Thread.Sleep(0);
+                System.Threading.Thread.Sleep(300);
                 game.Turn();
-
+                
             }
         }
     }

@@ -23,26 +23,26 @@ namespace Screeps
                 output = 'L';
                 
             }
-            if (printing.GetType() == typeof(EnergyCollector))
+            else if (printing.GetType() == typeof(EnergyCollector))
             {
                 output = 'E';
 
             }
-            if (printing.GetType() == typeof(Mine))
+            else if (printing.GetType() == typeof(Mine))
             {
                 output = 'П';
             }
-            if (printing.GetType() == typeof(Tree))
+            else if (printing.GetType() == typeof(Tree))
             {
                 output = '|';
 
             }
-            if (printing.GetType() == typeof(Energy))
+            else if (printing.GetType() == typeof(Energy))
             {
                 output = '*';
 
             }
-            if (printing.GetType() == typeof(Spawner))
+            else if (printing.GetType() == typeof(Spawner))
             {
                 output = '0';
 
